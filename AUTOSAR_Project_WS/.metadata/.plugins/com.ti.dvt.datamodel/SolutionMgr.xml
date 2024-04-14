@@ -5,7 +5,7 @@
    <string>defaultSolution</string>
    <void method="set">
     <object idref="SolutionManager$PersistState0"/>
-    <string>C:\ti\ccs1240\ccs\ccs_base\dvt_4.1.0.202208031631\CodeGen\solutions\CodeGenCoverage</string>
+    <string>C:\ti\ccs1260\ccs\ccs_base\dvt_4.1.0.202307061549\CodeGen\solutions\CodeGenCoverage</string>
    </void>
   </void>
  </object>
@@ -14,10 +14,10 @@
  <void id="ArrayList0" method="get">
   <object idref="SolutionManager$PersistState0"/>
   <void method="add">
-   <string>D:\MT\My Courses\Advanced_Embedded_Diploma\ARM_Microcontrollers\Exercises\CCS\AUTOSAR_Project_WS\dvt\AnalysisSolutionsTemp\AnalysisSolution1703791302801\null</string>
+   <string>B:\Electronics And Electrical COMM\Courses\ArmAutosar\Autosar-Port-Driver-Tiva-c\AUTOSAR_Project_WS\dvt\AnalysisSolutionsTemp\AnalysisSolution1712967395780\null</string>
   </void>
   <void method="add">
-   <string>C:\ti\ccs1240\ccs\ccs_base\dvt_4.1.0.202208031631\CodeGen\solutions\CodeGenCoverage</string>
+   <string>C:\ti\ccs1260\ccs\ccs_base\dvt_4.1.0.202307061549\CodeGen\solutions\CodeGenCoverage</string>
   </void>
  </void>
 </void>

@@ -205,4 +205,5 @@ void Dio_GetVersionInfo(Std_VersionInfoType *versioninfo);
 /* Extern PB structures to be used by Dio and other modules */
 extern const Dio_ConfigType Dio_Configuration;
 
-#endif /* DIO_H */
+#endif 
+/* DIO_H */

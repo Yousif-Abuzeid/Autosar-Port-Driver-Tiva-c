@@ -437,3 +437,111 @@ Finished building target: "AUTOSAR_Project.out"
  
 
 **** Build Finished ****
+
+**** Clean-only build of configuration Debug for project AUTOSAR_Project ****
+
+"C:\\ti\\ccs1260\\ccs\\utils\\bin\\gmake" -k -j 12 clean -O 
+ 
+DEL /F  "AUTOSAR_Project.out" 
+DEL /F "App.obj" "Button.obj" "Det.obj" "Dio.obj" "Dio_PBcfg.obj" "Gpt.obj" "Led.obj" "Mcu.obj" "Os.obj" "Port.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
+DEL /F "App.d" "Button.d" "Det.d" "Dio.d" "Dio_PBcfg.d" "Gpt.d" "Led.d" "Mcu.d" "Os.d" "Port.d" "main.d" "tm4c123gh6pm_startup_ccs.d" 
+Finished clean
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project AUTOSAR_Project ****
+
+"C:\\ti\\ccs1260\\ccs\\utils\\bin\\gmake" -k -j 12 all -O 
+ 
+Building file: "../Dio_PBcfg.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="B:/Electronics And Electrical COMM/Courses/ArmAutosar/Autosar-Port-Driver-Tiva-c/AUTOSAR_Project_WS/AUTOSAR_Project" --include_path="C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="Dio_PBcfg.d_raw"  "../Dio_PBcfg.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'Dio_PBcfg.obj' failed
+"../Dio_PBcfg.c", line 44: error #7: unrecognized token
+"../Dio_PBcfg.c", line 44: error #20: identifier "DioConf_L" is undefined
+"../Dio_PBcfg.c", line 44: error #68: expected a "}"
+"../Dio_PBcfg.c", line 44: error #102: "Dio_ChannelType" has already been declared in the current scope
+"../Dio_PBcfg.c", line 44: error #66: expected a ";"
+5 errors detected in the compilation of "../Dio_PBcfg.c".
+gmake: *** [Dio_PBcfg.obj] Error 1
+Building file: "../Button.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="B:/Electronics And Electrical COMM/Courses/ArmAutosar/Autosar-Port-Driver-Tiva-c/AUTOSAR_Project_WS/AUTOSAR_Project" --include_path="C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="Button.d_raw"  "../Button.c"
+Finished building: "../Button.c"
+ 
+Building file: "../App.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="B:/Electronics And Electrical COMM/Courses/ArmAutosar/Autosar-Port-Driver-Tiva-c/AUTOSAR_Project_WS/AUTOSAR_Project" --include_path="C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="App.d_raw"  "../App.c"
+"../App.c", line 31: warning #225-D: function "Button_Init" declared implicitly
+Finished building: "../App.c"
+ 
+Building file: "../Det.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="B:/Electronics And Electrical COMM/Courses/ArmAutosar/Autosar-Port-Driver-Tiva-c/AUTOSAR_Project_WS/AUTOSAR_Project" --include_path="C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="Det.d_raw"  "../Det.c"
+"../Det.c", line 23: warning #112-D: statement is unreachable
+Finished building: "../Det.c"
+ 
+Building file: "../Dio.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="B:/Electronics And Electrical COMM/Courses/ArmAutosar/Autosar-Port-Driver-Tiva-c/AUTOSAR_Project_WS/AUTOSAR_Project" --include_path="C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="Dio.d_raw"  "../Dio.c"
+Finished building: "../Dio.c"
+ 
+Building file: "../Gpt.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="B:/Electronics And Electrical COMM/Courses/ArmAutosar/Autosar-Port-Driver-Tiva-c/AUTOSAR_Project_WS/AUTOSAR_Project" --include_path="C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="Gpt.d_raw"  "../Gpt.c"
+Finished building: "../Gpt.c"
+ 
+Building file: "../Led.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="B:/Electronics And Electrical COMM/Courses/ArmAutosar/Autosar-Port-Driver-Tiva-c/AUTOSAR_Project_WS/AUTOSAR_Project" --include_path="C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="Led.d_raw"  "../Led.c"
+Finished building: "../Led.c"
+ 
+Building file: "../Mcu.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="B:/Electronics And Electrical COMM/Courses/ArmAutosar/Autosar-Port-Driver-Tiva-c/AUTOSAR_Project_WS/AUTOSAR_Project" --include_path="C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="Mcu.d_raw"  "../Mcu.c"
+Finished building: "../Mcu.c"
+ 
+Building file: "../Os.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="B:/Electronics And Electrical COMM/Courses/ArmAutosar/Autosar-Port-Driver-Tiva-c/AUTOSAR_Project_WS/AUTOSAR_Project" --include_path="C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="Os.d_raw"  "../Os.c"
+Finished building: "../Os.c"
+ 
+Building file: "../Port.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="B:/Electronics And Electrical COMM/Courses/ArmAutosar/Autosar-Port-Driver-Tiva-c/AUTOSAR_Project_WS/AUTOSAR_Project" --include_path="C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="Port.d_raw"  "../Port.c"
+Finished building: "../Port.c"
+ 
+Building file: "../main.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="B:/Electronics And Electrical COMM/Courses/ArmAutosar/Autosar-Port-Driver-Tiva-c/AUTOSAR_Project_WS/AUTOSAR_Project" --include_path="C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+Finished building: "../main.c"
+ 
+Building file: "../tm4c123gh6pm_startup_ccs.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="B:/Electronics And Electrical COMM/Courses/ArmAutosar/Autosar-Port-Driver-Tiva-c/AUTOSAR_Project_WS/AUTOSAR_Project" --include_path="C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="tm4c123gh6pm_startup_ccs.d_raw"  "../tm4c123gh6pm_startup_ccs.c"
+Finished building: "../tm4c123gh6pm_startup_ccs.c"
+ 
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project AUTOSAR_Project ****
+
+"C:\\ti\\ccs1260\\ccs\\utils\\bin\\gmake" -k -j 12 all -O 
+ 
+Building file: "../Dio_PBcfg.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="B:/Electronics And Electrical COMM/Courses/ArmAutosar/Autosar-Port-Driver-Tiva-c/AUTOSAR_Project_WS/AUTOSAR_Project" --include_path="C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="Dio_PBcfg.d_raw"  "../Dio_PBcfg.c"
+Finished building: "../Dio_PBcfg.c"
+ 
+Building target: "AUTOSAR_Project.out"
+Invoking: Arm Linker
+"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"AUTOSAR_Project.map" --heap_size=0 --stack_size=512 -i"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/lib" -i"C:/ti/ccs1260/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="AUTOSAR_Project_linkInfo.xml" --rom_model -o "AUTOSAR_Project.out" "./App.obj" "./Button.obj" "./Det.obj" "./Dio.obj" "./Dio_PBcfg.obj" "./Gpt.obj" "./Led.obj" "./Mcu.obj" "./Os.obj" "./Port.obj" "./main.obj" "./tm4c123gh6pm_startup_ccs.obj" "../tm4c123gh6pm.cmd"  -llibc.a 
+<Linking>
+Finished building target: "AUTOSAR_Project.out"
+ 
+
+**** Build Finished ****
