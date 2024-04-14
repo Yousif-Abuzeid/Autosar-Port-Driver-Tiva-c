@@ -16,10 +16,10 @@
  * for example Youssef Abuzeid's ID = 5000 :) */
 #define PORT_VENDOR_ID    (5000U)
 
-/* Dio Module Id */
+/* Port Module Id */
 #define PORT_MODULE_ID    (124U)
 
-/* Dio Instance Id */
+/* Port Instance Id */
 #define PORT_INSTANCE_ID  (0U)
 
 /*
@@ -142,8 +142,8 @@ typedef enum
  */
 typedef struct 
 {
-   uint8 port_num; 
-    uint8 pin_num; 
+    Port_PinType port_num; 
+    Port_PinType pin_num; 
     Port_PinModeType pin_mode;
     Port_PinDirectionType pin_direction;
     uint8 pin_direction_changable;
@@ -152,6 +152,7 @@ typedef struct
     uint8 pin_level_init_value;
     
 }Port_ConfigPins;
+
 /*
  * Structure of congirations for all of pins
 */
