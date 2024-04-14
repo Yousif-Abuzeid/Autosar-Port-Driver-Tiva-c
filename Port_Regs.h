@@ -24,6 +24,7 @@
 #define PORT_DATA_REG_OFFSET              0x3FC
 #define PORT_DIR_REG_OFFSET               0x400
 #define PORT_ALT_FUNC_REG_OFFSET          0x420
+#define PORT_OPEN_DRAIN_REG_OFFSET        0x50C
 #define PORT_PULL_UP_REG_OFFSET           0x510
 #define PORT_PULL_DOWN_REG_OFFSET         0x514
 #define PORT_DIGITAL_ENABLE_REG_OFFSET    0x51C
@@ -31,5 +32,6 @@
 #define PORT_COMMIT_REG_OFFSET            0x524
 #define PORT_ANALOG_MODE_SEL_REG_OFFSET   0x528
 #define PORT_CTL_REG_OFFSET               0x52C
+
 
 #endif /*PORT_REGS_H*/

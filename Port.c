@@ -195,7 +195,7 @@ void port_init(const Port_ConfigType* ConfigPtr){
             CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ANALOG_MODE_SEL_REG_OFFSET),Port_Config[pin_index].pin_num); 
             /*OPen drain select for data pin*/
             if(pin_index%2!=0){
-            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_OPEN_DRAIN) , Port_Config[pin_Index].pin_num); 
+            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_OPEN_DRAIN_REG_OFFSET) , Port_Config[pin_Index].pin_num); 
             } 
             /*Choose I2C in Control Register*/
             *(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_CTL_REG_OFFSET) |= (PORT_PIN_MODE_I2C << (Port_Config[pin_Index].pin_num * 4));
