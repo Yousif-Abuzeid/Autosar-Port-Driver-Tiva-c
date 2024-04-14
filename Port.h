@@ -148,7 +148,7 @@ typedef struct
     Port_PinDirectionType pin_direction;
     uint8 pin_direction_changable;
     uint8 pin_mode_changable;
-    Port_InternalResistor resistor;
+    Port_InternalResistor pin_resistor;
     uint8 pin_level_init_value;
     
 }Port_ConfigPins;

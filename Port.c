@@ -48,15 +48,18 @@ void port_init(const Port_ConfigType* ConfigPtr){
 	 * Set the module state to initialized and point to the PB configuration structure using a global pointer.
 	 * This global pointer is global to be used by other functions to read the PB configuration structures
 	 */
+    else
+    #endif
+    {
     Port_Config=ConfigPtr->Pins; /*Address of the first Pin Structure*/
     PORT_Status = PORT_INITIALIZED;
-
-    #endif
+    
+    }
      /* point to the required Port Registers base address */
      volatile uint32 * PortGpio_Ptr = NULL_PTR; 
      /* index for pins array of strutures*/
      uint8 pin_index=0; 
-     for(pin_index=0; pin_index<43; pin_index++){
+     for(pin_index=0; pin_index<PORT_NUMBER_OF_PORT_PINS; pin_index++){
 
         switch(Port_Config[pin_index].port_num)
     {
@@ -77,7 +80,7 @@ void port_init(const Port_ConfigType* ConfigPtr){
      if( ((Port_Config[pin_index].port_num == 3) && (Port_Config[pin_index].pin_num == 7)) || ((Port_Config[pin_index].port_num == 5) && (Port_Config[pin_index].pin_num == 0)) ) /* PD7 or PF0 */
     {
         *(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_LOCK_REG_OFFSET) = 0x4C4F434B;                     /* Unlock the GPIOCR register */   
-        SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_COMMIT_REG_OFFSET) , ConfigPtr->pin_num);  /* Set the corresponding bit in GPIOCR register to allow changes on this pin */
+        SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_COMMIT_REG_OFFSET) , Port_Config[pin_index].pin_num);  /* Set the corresponding bit in GPIOCR register to allow changes on this pin */
     }
     else if( (Port_Config[pin_index].port_num == 2) && (Port_Config[pin_index].pin_num <= 3) ) /* PC0 to PC3 */
     {
@@ -89,15 +92,117 @@ void port_init(const Port_ConfigType* ConfigPtr){
     }
     switch (Port_Config[pin_index].pin_mode)
     {
-        /*GPIO mode*/
-    case PortConfig_Mode_GPIO:
+        /*Dio mode*/
+    case PORT_PIN_MODE_DIO:
+        /*Disable Analog*/
+        CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ANALOG_MODE_SEL_REG_OFFSET),Port_Config[pin_index].pin_num);
+        /*Disable Alternate Function*/  
+        CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ALT_FUNC_REG_OFFSET) , Port_Config[pin_index].pin_num);       
+        /*Select Regular I/O Function in Control Register*/
+        *(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_CTL_REG_OFFSET) &= ~(0x0000000F << (Port_Config[pin_index].pin_num * 4));
+        /*Choose Direction*/
+        if(PORT_PIN_IN==Port_Config[pin_index].pin_direction){
+            /*Configure As Input Pin*/
+            CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIR_REG_OFFSET) , Port_Config[pin_index].pin_num);
+            /*Choose PULL UP or PULL DOWN or OFF*/
+            if(PULL_UP==Port_Config[pin_index].pin_resistor){
+                SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_PULL_UP_REG_OFFSET) , Port_Config[pin_index].pin_num);
+            }else if(PULL_DOWN==Port_Config[pin_index].pin_resistor){
+                SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_PULL_DOWN_REG_OFFSET) , Port_Config[pin_index].pin_num);
+            }else{
+                /*Do Nothing*/
+            }
+
+        }else{
+            /*Configure as Output Pin*/
+            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIR_REG_OFFSET) , Port_Config[pin_index].pin_num); 
+            if(STD_HIGH==Port_Config[pin_index].pin_level_init_value){
+                /*Initalize the pin with Logic High*/
+                SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DATA_REG_OFFSET) , Port_Config[pin_index].pin_num); 
+            }else{
+                /*Initalize the pin with Logic Low*/
+                CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DATA_REG_OFFSET) , Port_Config[pin_index].pin_num);
+            }
+        }
+        /*Digital Enable*/
+        SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIGITAL_ENABLE_REG_OFFSET) , Port_Config[pin_index].pin_num); 
         
         break;
-    
-    default:
-        break;
-    }
+        /*ADC Mode*/
+    case PORT_PIN_MODE_ADC:
+        /*Enable Alternate Function*/
+        SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ALT_FUNC_REG_OFFSET) , Port_Config[pin_index].pin_num);
+        /*Set Direction As Ipnut*/    
+        CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIR_REG_OFFSET) , Port_Config[pin_index].pin_num);
+        /*Disable Digital*/
+        CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIGITAL_ENABLE_REG_OFFSET) , Port_Config[pin_index].pin_num);
+        /*Enable Analog Mode*/
+        SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ANALOG_MODE_SEL_REG_OFFSET),Port_Config[pin_index].pin_num);
 
-     }
+        break;
+        /*UART Mode*/
+    case PORT_PIN_MODE_UART:
+         /*Enable Alternate Function*/
+        SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ALT_FUNC_REG_OFFSET) , Port_Config[pin_index].pin_num);
+         /*Disable Analog Mode*/
+        CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ANALOG_MODE_SEL_REG_OFFSET),Port_Config[pin_index].pin_num);
+        /*Choose Direction Tx or Rx*/
+        if(PORT_PIN_IN==Port_Config[pin_index].pin_direction){
+             /*Configure As Input Pin (Rx)*/
+            CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIR_REG_OFFSET) , Port_Config[pin_index].pin_num);
+
+        }else{
+            /*Configure As Output Pin (Tx)*/
+            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIR_REG_OFFSET) , Port_Config[pin_index].pin_num);
+        }
+        /*Choose Uart in Control Register*/
+        *(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_CTL_REG_OFFSET) |= ((uint32)PORT_PIN_MODE_UART << (Port_Config[pin_index].pin_num * 4));
+        /*Digital Enable*/
+        SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIGITAL_ENABLE_REG_OFFSET) , Port_Config[pin_index].pin_num);
+        break;
+        /*SPI Mode*/
+    case PORT_PIN_MODE_SPI:
+
+        /*Enable Alternate Function*/
+        SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ALT_FUNC_REG_OFFSET) , Port_Config[pin_Index].pin_num);
+        /*Disable Analog*/
+        CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ANALOG_MODE_SEL_REG_OFFSET),Port_Config[pin_index].pin_num); 
+        /*Choose Direction Tx or Rx*/
+        if(PORT_PIN_IN==Port_Config[pin_index].pin_direction){
+            /*Configure As Input Pin (Rx)*/
+            CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIR_REG_OFFSET) , Port_Config[pin_index].pin_num);
+
+        }else{
+            /*Configure As Output Pin (Tx)*/
+            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIR_REG_OFFSET) , Port_Config[pin_index].pin_num);
+        }      
+        if(pin_index>=PORT_D_PIN_0 && pin_index<=PORT_D_PIN_3)/*PD0,PD1,PD2,PD3*/
+        { 
+            *(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_CTL_REG_OFFSET) |= ((PORT_PIN_MODE_SPI-1) << (Port_Config[pin_Index].pin_num * 4));  
+        }
+        else
+          {
+         *(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_CTL_REG_OFFSET) |= (PORT_PIN_MODE_SPI << (Port_Config[pin_Index].pin_num * 4)); 
+          }
+          /*Digital Enable*/
+        SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIGITAL_ENABLE_REG_OFFSET) , Port_Config[pin_index].pin_num); 
+        break;
+            /*I2C Mode*/
+        case PORT_PIN_MODE_I2C:
+            /*Alternate Function Enable*/
+            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ALT_FUNC_REG_OFFSET) , Port_Config[pin_Index].pin_num);
+            /*Disable Analog*/
+            CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ANALOG_MODE_SEL_REG_OFFSET),Port_Config[pin_index].pin_num); 
+            /*OPen drain select for data pin*/
+            if(pin_index%2!=0){
+            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_OPEN_DRAIN) , Port_Config[pin_Index].pin_num); 
+            } 
+            /*Choose I2C in Control Register*/
+            *(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_CTL_REG_OFFSET) |= (PORT_PIN_MODE_I2C << (Port_Config[pin_Index].pin_num * 4));
+            /*Digital Enable*/
+            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIGITAL_ENABLE_REG_OFFSET) , Port_Config[pin_Index].pin_num);
+        break;
+        
+    }
 
 }

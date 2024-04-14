@@ -48,19 +48,19 @@
 
 
 /*Modes Of Configuration */
-#define PortConfig_Mode_ADC        (uint8)9     /* ADC Mode */
-#define PortConfig_Mode_GPIO       (uint8)0     /* GPIO Mode */
-#define PortConfig_Mode_UART       (uint8)1     /* UART Mode */
-#define PortConfig_Mode_SPI        (uint8)2     /* SPI Mode */
-#define PortConfig_Mode_I2C        (uint8)3     /* I2C Mode */
-#define PortConfig_Mode_M0PWM      (uint8)4     /*M0PWM Mode */
-#define PortConfig_Mode_M0FAULT    (uint8)4     /*Motion Control Module  Mode */
-#define PortConfig_Mode_M1PWM      (uint8)5     /*M1PWM Mode */
-#define PortConfig_Mode_IDX_PHASE  (uint8)6     /* IDX AND PHASE Mode */
-#define PortConfig_Mode_TIMER      (uint8)7     /* TIMER  Mode */
-#define PortConfig_Mode_CAN        (uint8)8     /* CAN Mode */
-#define PortConfig_Mode_USB        (uint8)8     /* USB Mode */
-#define PortConfig_Mode_NMI        (uint8)8     /*Non-Maskable Interrupt*/
+#define PORT_PIN_MODE_ADC        (uint8)9     /* ADC Mode */
+#define PORT_PIN_MODE_DIO        (uint8)0     /* DIO Mode */
+#define PORT_PIN_MODE_UART       (uint8)1     /* UART Mode */
+#define PORT_PIN_MODE_SPI        (uint8)2     /* SPI Mode */
+#define PORT_PIN_MODE_I2C        (uint8)3     /* I2C Mode */
+#define PORT_PIN_MODE_M0PWM      (uint8)4     /*M0PWM Mode */
+#define PORT_PIN_MODE_M0FAULT    (uint8)4     /*Motion Control Module  Mode */
+#define PORT_PIN_MODE_M1PWM      (uint8)5     /*M1PWM Mode */
+#define PORT_PIN_MODE_IDX_PHASE  (uint8)6     /* IDX AND PHASE Mode */
+#define PORT_PIN_MODE_TIMER      (uint8)7     /* TIMER  Mode */
+#define PORT_PIN_MODE_CAN        (uint8)8     /* CAN Mode */
+#define PORT_PIN_MODE_USB        (uint8)8     /* USB Mode */
+#define PORT_PIN_MODE_NMI        (uint8)8     /*Non-Maskable Interrupt*/
 
 /*PORT INDEXS*/   
 #define PORT_A     (0U)
