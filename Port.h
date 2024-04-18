@@ -144,12 +144,12 @@ typedef struct
 {
     Port_PinType port_num; 
     Port_PinType pin_num; 
-    Port_PinModeType pin_mode;
     Port_PinDirectionType pin_direction;
     uint8 pin_direction_changable;
     uint8 pin_mode_changable;
     Port_InternalResistor pin_resistor;
     uint8 pin_level_init_value;
+     Port_PinModeType pin_mode;
     
 }Port_ConfigPins;
 
@@ -169,6 +169,7 @@ typedef struct
 /************************************************************************************
 * Service Name: Port_Init
 * Sync/Async: Synchronous
+* Service ID[hex]:0x00
 * Reentrancy: Non-reentrant
 * Parameters (in): ConfigPtr - Pointer to post-build configuration data
 * Parameters (inout): None
@@ -187,6 +188,7 @@ void port_init(const Port_ConfigType* ConfigPtr);
 /************************************************************************************
 * Service Name: Port_SetPinDirection
 * Sync/Async: Synchronous
+* Service ID[hex]:0x01
 * Reentrancy: Non-reentrant
 * Parameters (in):  Pin > Port Pin ID number 
                     Direction> Port Pin Direction 

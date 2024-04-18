@@ -27,6 +27,7 @@ STATIC uint8 PORT_Status = PORT_NOT_INITIALIZED;
 /************************************************************************************
 * Service Name: Port_Init
 * Sync/Async: Synchronous
+* Service ID[hex]:0x00
 * Reentrancy: Non-reentrant
 * Parameters (in): ConfigPtr - Pointer to post-build configuration data
 * Parameters (inout): None
@@ -202,8 +203,125 @@ void port_init(const Port_ConfigType* ConfigPtr){
             /*Digital Enable*/
             SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIGITAL_ENABLE_REG_OFFSET) , Port_Config[pin_Index].pin_num);
         break;
-        
+        case PORT_PIN_MODE_PWM:
+            /*Alternate Function Enable*/
+            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ALT_FUNC_REG_OFFSET) , Port_Config[pin_Index].pin_num);
+            /*Disable Analog*/
+            CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ANALOG_MODE_SEL_REG_OFFSET),Port_Config[pin_index].pin_num);
+            /*Configure As Output Pin (Tx)*/
+            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIR_REG_OFFSET) , Port_Config[pin_index].pin_num);
+            if((pin_index>=PORT_B_PIN_4 &&pin_index <=PORT_B_PIN_7)||(pin_index>=PORT_C_PIN_4 && pin_index<=PORT_C_PIN_5)||(pin_index>=PORT_D_PIN_0 && pin_index<=PORT_D_PIN_1)||(pin_index>=PORT_E_PIN_4 && pin_index<=PORT_E_PIN_5)){
+                 /*Choose M0PWM in Control Register*/
+            *(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_CTL_REG_OFFSET) |= (PORT_PIN_MODE_M0PWM << (Port_Config[pin_Index].pin_num * 4));
+            }else{
+               /*Choose M1PWM in Control Register*/
+            *(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_CTL_REG_OFFSET) |= (PORT_PIN_MODE_M1PWM << (Port_Config[pin_Index].pin_num * 4));
+
+            }
+            /*Digital Enable*/
+            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIGITAL_ENABLE_REG_OFFSET) , Port_Config[pin_Index].pin_num);
+        break;
+        case PORT_PIN_MODE_GPT:
+            /*Alternate Function Enable*/
+            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ALT_FUNC_REG_OFFSET) , Port_Config[pin_Index].pin_num);
+            /*Disable Analog*/
+            CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ANALOG_MODE_SEL_REG_OFFSET),Port_Config[pin_index].pin_num);
+              /*Choose Direction*/
+        if(PORT_PIN_IN==Port_Config[pin_index].pin_direction){
+            /*Configure As Input Pin */
+            CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIR_REG_OFFSET) , Port_Config[pin_index].pin_num);
+
+        }else{
+            /*Configure As Output Pin */
+            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIR_REG_OFFSET) , Port_Config[pin_index].pin_num);
+        }
+            /*Choose TxCCPx in Control Register*/
+            *(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_CTL_REG_OFFSET) |= (PORT_PIN_MODE_GPT << (Port_Config[pin_Index].pin_num * 4));
+             /*Digital Enable*/
+            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIGITAL_ENABLE_REG_OFFSET) , Port_Config[pin_Index].pin_num);
+        break;
+        /*if a pin has no congifuration exist configure the pin as input DIO*/        
+        default:
+             /*Disable Analog*/
+            CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ANALOG_MODE_SEL_REG_OFFSET),Port_Config[pin_index].pin_num);
+             /*Disable Alternate Function*/  
+             CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ALT_FUNC_REG_OFFSET) , Port_Config[pin_index].pin_num);       
+            /*Select Regular I/O Function in Control Register*/
+            *(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_CTL_REG_OFFSET) &= ~(0x0000000F << (Port_Config[pin_index].pin_num * 4));
+            /*Configure As Input Pin*/
+            CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIR_REG_OFFSET) , Port_Config[pin_index].pin_num);
+             /*Digital Enable*/
+            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIGITAL_ENABLE_REG_OFFSET) , Port_Config[pin_Index].pin_num);
+            break;
+
     }
+    if (Port_Config[pin_index].pin_mode==PORT_PIN_MODE_CAN ||Port_Config[pin_index].pin_mode==PORT_PIN_MODE_USB||Port_Config[pin_index].pin_mode==PORT_PIN_MODE_NMI)
+    {
+        /*Alternate Function Enable*/
+        SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ALT_FUNC_REG_OFFSET) , Port_Config[pin_Index].pin_num);
+        /*Disable Analog*/
+        if(PORT_PIN_IN==Port_Config[pin_index].pin_direction){
+            /*Configure As Input Pin */
+            CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIR_REG_OFFSET) , Port_Config[pin_index].pin_num);
+
+        }else{
+            /*Configure As Output Pin */
+            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIR_REG_OFFSET) , Port_Config[pin_index].pin_num);
+        }
+        CLEAR_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_ANALOG_MODE_SEL_REG_OFFSET),Port_Config[pin_index].pin_num);
+        if(PORT_A_PIN_0==pin_index||PORT_A_PIN_1==pin_index||PORT_B_PIN_4==pin_index||PORT_B_PIN_5==pin_index||PORT_E_PIN_4==pin_index||PORT_E_PIN_5==pin_index){
+            *(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_CTL_REG_OFFSET) |= (PORT_PIN_MODE_CAN << (Port_Config[pin_Index].pin_num * 4));
+        }else if(PORT_C_PIN_6==pin_index||PORT_C_PIN_7==pin_index||PORT_D_PIN_2==pin_index||PORT_D_PIN_3==pin_index||PORT_F_PIN_4==pin_index){
+            *(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_CTL_REG_OFFSET) |= (PORT_PIN_MODE_CAN << (Port_Config[pin_Index].pin_num * 4));
+        }else{
+             /*Choose PULL UP or PULL DOWN or OFF*/
+            if(PULL_UP==Port_Config[pin_index].pin_resistor){
+                SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_PULL_UP_REG_OFFSET) , Port_Config[pin_index].pin_num);
+            }else if(PULL_DOWN==Port_Config[pin_index].pin_resistor){
+                SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_PULL_DOWN_REG_OFFSET) , Port_Config[pin_index].pin_num);
+            }else{
+                /*Do Nothing*/
+            }
+            /*Choose NMI in Control Register*/
+            *(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_CTL_REG_OFFSET) |= (PORT_PIN_MODE_NMI << (Port_Config[pin_Index].pin_num * 4));
+
+        }
+          /*Digital Enable*/
+            SET_BIT(*(volatile uint32 *)((volatile uint8 *)PortGpio_Ptr + PORT_DIGITAL_ENABLE_REG_OFFSET) , Port_Config[pin_Index].pin_num);
+    }
+    
 
 }
+
 }
+
+/************************************************************************************
+* Service Name: Port_SetPinDirection
+* Sync/Async: Synchronous
+* Service ID[hex]:0x01
+* Reentrancy: Non-reentrant
+* Parameters (in):  Pin > Port Pin ID number 
+                    Direction> Port Pin Direction 
+* Parameters (inout): None
+* Parameters (out): None
+* Return value: None
+* Description: Function to Sets the port pin direction.
+************************************************************************************/
+#if (PORT_SET_PIN_DIRECTION_API == STD_ON)
+void Port_SetPinDirection( Port_PinType Pin, Port_PinDirectionType Direction ){
+
+}
+#endif
+
+
+#if (PORT_VERSION_INFO_API == STD_ON)
+void Port_GetVersionInfo( Std_VersionInfoType* versioninfo );
+#endif
+
+
+#if (PORT_SET_PIN_MODE_API == STD_ON)
+void Port_SetPinMode( Port_PinType Pin, Port_PinModeType Mode );
+#endif
+
+
+void Port_RefreshPortDirection( void );
