@@ -14,12 +14,7 @@
 #include "Std_Types.h"
 #include "Button_Cfg.h"
 
-/* 
- * Description: 1. Fill the button configurations structure 
- *              2. Set the PIN direction which the button is connected as INPUT pin
- *              3. Set the pin internal resistor
- */
-void Button_init();
+
 
 /* Description: Read the Button state Pressed/Released */
 uint8 Button_GetState(void);

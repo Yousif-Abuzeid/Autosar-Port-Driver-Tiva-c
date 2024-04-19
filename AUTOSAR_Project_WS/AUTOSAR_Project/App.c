@@ -10,6 +10,7 @@
  ******************************************************************************/
 
 #include "App.h"
+#include "Port.h"
 #include "Button.h"
 #include "Led.h"
 #include "Dio.h"
@@ -20,15 +21,12 @@ void Init_Task(void)
 {
     /* Initialize Mcu Driver */
     Mcu_Init();
-
+    /*Initialize Port Driver*/
+    port_init(&Port_Configuration);
     /* Initialize Dio Driver */
     Dio_Init(&Dio_Configuration);
 
-    /* Initialize LED Driver */
-    Led_Init();
-
-    /* Initialize Button Driver */
-    Button_Init();
+    
 }
 
 /* Description: Task executes every 20 Mili-seconds to check the button state */

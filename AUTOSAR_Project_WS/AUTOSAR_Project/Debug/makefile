@@ -20,6 +20,7 @@ ORDERED_OBJS += \
 "./Mcu.obj" \
 "./Os.obj" \
 "./Port.obj" \
+"./Port_PBcfg.obj" \
 "./main.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
 "../tm4c123gh6pm.cmd" \
@@ -152,8 +153,8 @@ AUTOSAR_Project.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)
-	-$(RM) "App.obj" "Button.obj" "Det.obj" "Dio.obj" "Dio_PBcfg.obj" "Gpt.obj" "Led.obj" "Mcu.obj" "Os.obj" "Port.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
-	-$(RM) "App.d" "Button.d" "Det.d" "Dio.d" "Dio_PBcfg.d" "Gpt.d" "Led.d" "Mcu.d" "Os.d" "Port.d" "main.d" "tm4c123gh6pm_startup_ccs.d" 
+	-$(RM) "App.obj" "Button.obj" "Det.obj" "Dio.obj" "Dio_PBcfg.obj" "Gpt.obj" "Led.obj" "Mcu.obj" "Os.obj" "Port.obj" "Port_PBcfg.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
+	-$(RM) "App.d" "Button.d" "Det.d" "Dio.d" "Dio_PBcfg.d" "Gpt.d" "Led.d" "Mcu.d" "Os.d" "Port.d" "Port_PBcfg.d" "main.d" "tm4c123gh6pm_startup_ccs.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

@@ -8,6 +8,7 @@
 "./Mcu.obj"
 "./Os.obj"
 "./Port.obj"
+"./Port_PBcfg.obj"
 "./main.obj"
 "./tm4c123gh6pm_startup_ccs.obj"
 "../tm4c123gh6pm.cmd"

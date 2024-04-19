@@ -19,6 +19,7 @@ C_SRCS += \
 ../Mcu.c \
 ../Os.c \
 ../Port.c \
+../Port_PBcfg.c \
 ../main.c \
 ../tm4c123gh6pm_startup_ccs.c 
 
@@ -33,6 +34,7 @@ C_DEPS += \
 ./Mcu.d \
 ./Os.d \
 ./Port.d \
+./Port_PBcfg.d \
 ./main.d \
 ./tm4c123gh6pm_startup_ccs.d 
 
@@ -47,6 +49,7 @@ OBJS += \
 ./Mcu.obj \
 ./Os.obj \
 ./Port.obj \
+./Port_PBcfg.obj \
 ./main.obj \
 ./tm4c123gh6pm_startup_ccs.obj 
 
@@ -61,6 +64,7 @@ OBJS__QUOTED += \
 "Mcu.obj" \
 "Os.obj" \
 "Port.obj" \
+"Port_PBcfg.obj" \
 "main.obj" \
 "tm4c123gh6pm_startup_ccs.obj" 
 
@@ -75,6 +79,7 @@ C_DEPS__QUOTED += \
 "Mcu.d" \
 "Os.d" \
 "Port.d" \
+"Port_PBcfg.d" \
 "main.d" \
 "tm4c123gh6pm_startup_ccs.d" 
 
@@ -89,6 +94,7 @@ C_SRCS__QUOTED += \
 "../Mcu.c" \
 "../Os.c" \
 "../Port.c" \
+"../Port_PBcfg.c" \
 "../main.c" \
 "../tm4c123gh6pm_startup_ccs.c" 
 

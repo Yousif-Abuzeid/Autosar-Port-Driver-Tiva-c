@@ -14,11 +14,6 @@
 #include "Std_Types.h"
 #include "Led_Cfg.h"
 
-/* Description: 1. Fill the led configurations structure 
- *              2. Set the PIN direction which the led is connected as OUTPUT pin
- *		        3. Initialize the led ON/OFF according to the initial value
- */
-void Led_Init(void);
 
 /* Description: Set the LED state to ON */
 void Led_SetOn(void);

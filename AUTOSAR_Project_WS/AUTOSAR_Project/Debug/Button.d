@@ -7,7 +7,6 @@ Button.obj: ../Platform_Types.h
 Button.obj: ../Compiler.h
 Button.obj: ../Dio_Cfg.h
 Button.obj: ../Common_Macros.h
-Button.obj: ../Port.h
 Button.obj: ../Button.h
 Button.obj: ../Button_Cfg.h
 
@@ -24,8 +23,6 @@ Button.obj: ../Button_Cfg.h
 ../Dio_Cfg.h:
 
 ../Common_Macros.h:
-
-../Port.h:
 
 ../Button.h:
 
