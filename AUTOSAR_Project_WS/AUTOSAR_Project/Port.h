@@ -189,7 +189,7 @@ void port_init(const Port_ConfigType* ConfigPtr);
 * Service Name: Port_SetPinDirection
 * Sync/Async: Synchronous
 * Service ID[hex]:0x01
-* Reentrancy: Non-reentrant
+* Reentrancy: Reentrant
 * Parameters (in):  Pin > Port Pin ID number 
                     Direction> Port Pin Direction 
 * Parameters (inout): None
@@ -201,17 +201,51 @@ void port_init(const Port_ConfigType* ConfigPtr);
 void Port_SetPinDirection( Port_PinType Pin, Port_PinDirectionType Direction );
 #endif
 
+/************************************************************************************
+* Service Name: Port_RefreshPortDirection
+* Sync/Async: Synchronous
+* Service ID[hex]:0x02
+* Reentrancy:Non-reentrant
+* Parameters (in): None
+* Parameters (inout): None
+* Parameters (out): None
+* Return value: None
+* Description: Refreshes port direction. 
+************************************************************************************/
+void Port_RefreshPortDirection( void );
 
+/************************************************************************************
+* Service Name: Port_GetVersionInfo
+* Sync/Async: Synchronous
+* Service ID[hex]:0x03
+* Reentrancy: Non-reentrant
+* Parameters (in): None
+* Parameters (inout): None
+* Parameters (out): versioninfo > Pointer to where to store the version information of this module. 
+* Return value: None
+* Description: Returns the version information of this module.
+************************************************************************************/
 #if (PORT_VERSION_INFO_API == STD_ON)
 void Port_GetVersionInfo( Std_VersionInfoType* versioninfo );
 #endif
 
 
+/************************************************************************************
+* Service Name: Port_SetPinMode
+* Sync/Async: Synchronous
+* Service ID[hex]:0x04
+* Reentrancy: Reentrant
+* Parameters (in): Pin > Port Pin ID number 
+                    Mode > Port Pin Mode 
+* Parameters (inout): None
+* Parameters (out): None
+* Return value: None
+* Description: Sets the port pin mode.
+************************************************************************************/
 #if (PORT_SET_PIN_MODE_API == STD_ON)
 void Port_SetPinMode( Port_PinType Pin, Port_PinModeType Mode );
 #endif
 
-void Port_RefreshPortDirection( void );
 
 /*******************************************************************************
  *                       External Variables                                    *
