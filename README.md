@@ -10,22 +10,6 @@ This project provides a comprehensive implementation of an AUTOSAR-compliant Por
 - **Scalability**: Easily extensible to support new hardware or additional features.
 - **Configurability**: Flexible configuration of GPIO pins through configuration files.
 
-## Architecture
-
-### Layers
-1. **Microcontroller Abstraction Layer (MCAL)**
-   - Manages low-level hardware interactions.
-   - Provides a standard interface to the upper layers.
-   
-2. **ECU Abstraction Layer (ECUAL)**
-   - Offers a hardware-independent interface to the application layer.
-   - Allows for portability across different microcontrollers without modifying the application code.
-   
-3. **Service Layer**
-   - Provides system services such as diagnostics and communication.
-
-4. **Application Layer**
-   - Contains user application code that leverages the services of the lower layers.
 
 ## Port Driver Features
 
